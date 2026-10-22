@@ -1,0 +1,6 @@
+# R formatter (https://posit-dev.github.io/air/). Used by `pixi run fmt`,
+# pre-commit and Positron/VS Code (Posit.air-vscode) on save.
+[format]
+line-width = 120
+indent-width = 2
+exclude = [".pixi", ".snakemake"]

@@ -1,0 +1,12 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+description: One row per sample in the sample sheet (config/samples.tsv)
+type: object
+properties:
+  sample_id:
+    type: string
+    pattern: "^[A-Za-z0-9_-]+$"
+    description: Unique sample name, used as the {sample} wildcard
+  group:
+    type: string
+    description: Experimental group
+required: [sample_id, group]

@@ -1,0 +1,54 @@
+// Shared editor settings for VS Code and Positron. Interpreters come from the
+// pixi `default` env (`pixi install` first).
+{
+    "files.watcherExclude": {
+        "**/.snakemake/**": true,
+        "**/.pixi/**": true,
+        "**/data/**": true,
+        "**/results/**": true
+    },
+    "search.exclude": {
+        "**/.snakemake": true,
+        "**/.pixi": true,
+        "**/data": true,
+        "**/results": true,
+        "pixi.lock": true,
+        "workflow/envs/*.pin.txt": true
+    },
+    "files.associations": {
+        "Snakefile": "snakemake",
+        "*.smk": "snakemake"
+    },
+
+    // Python (pixi-code registers pixi envs with the Python Environments extension)
+    "python-envs.defaultEnvManager": "renan-r-santos.pixi-code:pixi",
+    "python-envs.defaultPackageManager": "renan-r-santos.pixi-code:pixi",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.pixi/envs/default/bin/python",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true
+    },
+
+    // R — VS Code (REditorSupport). Positron: pick the interpreter from
+    // .pixi/envs/default via the interpreter picker; Positron also scans the
+    // folders listed in positron.r.customRootFolders.
+    "r.rpath.linux": "${workspaceFolder}/.pixi/envs/default/bin/R",
+    "r.rterm.linux": "${workspaceFolder}/.pixi/envs/default/bin/R",
+    "r.libPaths": ["${workspaceFolder}/.pixi/envs/default/lib/R/library"],
+    "r.alwaysUseActiveTerminal": false,
+    "r.useRenvLibPath": false,
+    "r.lsp.diagnostics": true,
+    "positron.r.customRootFolders": ["${workspaceFolder}/.pixi/envs"],
+    "[r]": {
+        "editor.defaultFormatter": "Posit.air-vscode",
+        "editor.formatOnSave": true
+    },
+    "[quarto]": {
+        "editor.formatOnSave": false
+    },
+
+    // Notebooks run from the repo root, like rules and Quarto reports
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "notebook.workingDirectory": "${workspaceFolder}",
+    "quarto.render.previewType": "internal"
+}

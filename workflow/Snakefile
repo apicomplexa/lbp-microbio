@@ -1,0 +1,22 @@
+# Entry point. Always run Snakemake from the repository root (`pixi run workflow`):
+# `configfile:` and all pathvars are resolved relative to the working directory.
+from snakemake.utils import min_version
+
+min_version("9.19")
+
+
+configfile: "config/config.yaml"
+
+
+include: "rules/common.smk"
+include: "rules/example.smk"
+
+
+if config["notify"]["telegram"]:
+
+    include: "rules/notify.smk"
+
+
+rule all:
+    input:
+        "<reports>/example_report.html",

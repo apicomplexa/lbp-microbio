@@ -1,0 +1,18 @@
+# Execution settings — HOW to run. Snakemake 8+ picks up
+# workflow/profiles/default/config.yaml automatically when invoked from the repo root.
+# For another machine/cluster create workflow/profiles/<name>/config.yaml and
+# run `pixi run workflow --workflow-profile workflow/profiles/<name>`.
+# Keys are long CLI options without the leading dashes.
+software-deployment-method:
+  - conda
+cores: 4
+resources:
+  - mem_mb=8000
+rerun-incomplete: true
+printshellcmds: true
+show-failed-logs: true
+# Share built rule envs between projects/clones instead of .snakemake/conda:
+# conda-prefix: ~/.snakemake/conda
+# Per-rule threads/resources:
+# set-threads:
+#   some_rule: 8

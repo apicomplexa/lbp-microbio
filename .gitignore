@@ -1,0 +1,40 @@
+# pixi environments (rebuilt from pixi.lock)
+.pixi/*
+!.pixi/config.toml
+
+# Snakemake state, built rule envs, logs and benchmarks
+.snakemake/
+logs/
+benchmarks/
+
+# Data and references: never committed. Directories are kept via .gitkeep/README.
+data/**
+!data/*/
+!data/*/.gitkeep
+resources/*
+!resources/README.md
+
+# Outputs
+results/
+
+# Quarto / Jupyter / R
+.quarto/
+**/*.quarto_ipynb
+*_files/
+.ipynb_checkpoints/
+.Rhistory
+.RData
+.Rproj.user/
+
+# Python caches
+__pycache__/
+.ruff_cache/
+
+# Secrets (e.g. TG_BOT_TOKEN for workflow/rules/notify.smk)
+.env
+
+# OS / editors
+.DS_Store
+*.swp
+
+/.quarto/

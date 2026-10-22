@@ -1,0 +1,48 @@
+# Install once per clone: `pixi run hooks`. Run on all files: `pixi run pre-commit run -a`.
+# Local hooks call tools from the pixi `default` env, so versions match pixi.lock.
+exclude: ^(pixi\.lock|workflow/envs/.*\.pin\.txt)$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: [--maxkb=2000]
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: pixi run ruff check --fix --force-exclude
+        language: system
+        types_or: [python, jupyter]
+      - id: ruff-format
+        name: ruff format
+        entry: pixi run ruff format --force-exclude
+        language: system
+        types_or: [python, jupyter]
+      - id: snakefmt
+        name: snakefmt
+        entry: pixi run snakefmt
+        language: system
+        files: (\.smk|/Snakefile)$
+      - id: air
+        name: air format (R)
+        entry: pixi run air format
+        language: system
+        files: \.[Rr]$
+      # Keep workflow/envs in sync with pixi.lock: regenerates the exported
+      # envs whenever the manifest/lock changes; the commit fails if they moved,
+      # so you just `git add workflow/envs` and commit again.
+      - id: export-envs
+        name: export pixi envs to workflow/envs
+        entry: pixi run export-envs
+        language: system
+        files: ^pixi\.(toml|lock)$
+        pass_filenames: false

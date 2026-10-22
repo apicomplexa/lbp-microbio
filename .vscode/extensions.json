@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        "renan-r-santos.pixi-code",
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "snakemake.snakemake-lang",
+        "REditorSupport.r",
+        "Posit.air-vscode",
+        "quarto.quarto",
+        "ms-toolsai.jupyter",
+        "tamasfe.even-better-toml",
+        "redhat.vscode-yaml"
+    ]
+}

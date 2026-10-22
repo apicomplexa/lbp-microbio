@@ -1,0 +1,16 @@
+# Tool configuration only (ruff, snakefmt). Dependencies live in pixi.toml —
+# pixi.toml takes precedence when both manifests are present.
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+extend-exclude = [".pixi", ".snakemake", "workflow/notebooks"]
+# `snakemake` object is injected into rule scripts at run time
+builtins = ["snakemake"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM"]
+
+[tool.snakefmt]
+line_length = 120
+include = '\.smk$|^Snakefile$'

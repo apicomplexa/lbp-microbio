@@ -1,0 +1,24 @@
+# Analysis parameters — WHAT to analyse. Validated against
+# workflow/schemas/config.schema.yaml; keys are described in config/README.md.
+# HOW to run (cores, memory, conda, cluster) lives in workflow/profiles/.
+
+samples: config/samples.tsv
+
+# Snakemake pathvars: write "<results>/x.tsv" in rules instead of hard-coding
+# directories. Values may reference other pathvars.
+pathvars:
+  data_raw: data/raw
+  temp: data/temp
+  resources: resources
+  results: results
+  reports: <results>/reports
+  figures: <results>/figures
+  logs: logs
+
+notify:
+  telegram: false # see workflow/rules/notify.smk
+
+# Parameters of the example module (workflow/rules/example.smk) — delete with it.
+example:
+  n_features: 50
+  seed: 42

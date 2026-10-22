@@ -1,0 +1,33 @@
+---
+title: "Example report"
+date: today
+params:
+  summary: "results/example/summary.tsv"
+---
+
+```{r}
+#| label: setup
+#| include: false
+suppressPackageStartupMessages(library(tidyverse))
+source("workflow/scripts/common/plotting.R")
+summary <- read_tsv(params$summary, show_col_types = FALSE)
+```
+
+## Samples
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: "Per-sample totals"
+knitr::kable(summary)
+```
+
+## Totals by group
+
+```{r}
+#| label: fig-totals
+#| fig-cap: "Total counts per sample"
+ggplot(summary, aes(group, total, colour = group)) +
+  geom_jitter(width = 0.1, size = 3) +
+  labs(x = NULL, y = "Total counts") +
+  theme_project()
+```

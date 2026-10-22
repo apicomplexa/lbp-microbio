@@ -1,0 +1,27 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+description: Schema for config/config.yaml. Extend it whenever you add a config key.
+type: object
+properties:
+  samples:
+    type: string
+    description: Path to the sample sheet (TSV), see samples.schema.yaml
+  pathvars:
+    type: object
+    description: Snakemake pathvars, used in rules as <name>
+    additionalProperties:
+      type: string
+    required: [results, logs, temp, reports, figures]
+  notify:
+    type: object
+    properties:
+      telegram:
+        type: boolean
+        default: false
+    default: {telegram: false}
+  example:
+    type: object
+    properties:
+      n_features: {type: integer, minimum: 1}
+      seed: {type: integer}
+    required: [n_features, seed]
+required: [samples, pathvars]

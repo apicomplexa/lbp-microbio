@@ -1,0 +1,36 @@
+# Quarto project settings for every .qmd in the repo (workflow/report/, notebooks).
+# execute-dir: project -> code chunks run from the repo root, so paths like
+# "results/..." and "workflow/scripts/common/..." work in reports and rules alike.
+project:
+  type: default
+  execute-dir: project
+
+toc: true
+toc-depth: 3
+number-sections: true
+
+execute:
+  echo: true
+  warning: false
+
+format:
+  html:
+    toc-location: left
+    format-links: false # no "Other formats" links to pdf
+    embed-resources: true # single self-contained file in results/reports
+    theme: cosmo
+    highlight-style: github
+    code-fold: true
+    smooth-scroll: true
+  # PDF needs a TeX distribution: `pixi run quarto install tinytex`
+  pdf:
+    documentclass: scrreprt
+    classoption: [oneside, a4paper]
+    papersize: a4
+    geometry: [top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]
+    fontsize: 11pt
+    linestretch: 1.35
+    colorlinks: true
+    header-includes: |
+      \usepackage{booktabs}
+      \usepackage{longtable}

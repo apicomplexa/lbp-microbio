@@ -1,0 +1,21 @@
+# Normalise line endings; scripts must stay LF to run on Linux/HPC.
+* text=auto eol=lf
+
+# Lock files: no 3-way merge (re-run `pixi lock` instead), collapsed in diffs/GitHub.
+pixi.lock merge=binary linguist-language=YAML linguist-generated=true -diff
+workflow/envs/*.pin.txt linguist-generated=true -diff
+# Exported env specs stay diffable so version changes are visible in review.
+workflow/envs/*.yaml linguist-generated=true
+
+# Language detection on GitHub
+*.smk linguist-language=Snakemake
+Snakefile linguist-language=Snakemake
+*.qmd linguist-detectable=true
+
+# Binary formats
+*.pdf binary
+*.png binary
+*.rds binary
+*.RData binary
+*.xlsx binary
+*.gz binary

@@ -1,0 +1,9 @@
+linters: linters_with_defaults(
+    line_length_linter = line_length_linter(120L),
+    # formatting is owned by air (air.toml); avoid conflicting style lints
+    indentation_linter = NULL,
+    whitespace_linter = NULL,
+    commas_linter = NULL,
+    # `snakemake` object is injected into rule scripts at run time
+    object_usage_linter = NULL
+  )
