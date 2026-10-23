@@ -87,7 +87,70 @@ git add pixi.toml pixi.lock workflow/envs
 
 ## Roadmap
 
-- [ ] …
+### Upstream & ASV inference
+- [ ] SRA download + primer trimming (cutadapt) + DADA2 quality filtering, with QC reports
+- [ ] Contaminant removal (+ mitochondrial and plasmid DNA)
+- [ ] Error models + per-batch ASV calling (DADA2), batch merge, chimera removal
+- [ ] Taxonomy assignment (DECIPHER IdTaxa vs SILVA SSU r138.2)
+- [ ] Results export: ASVs sequences (fasta), ASVs counts per sample, ASV taxonomy tab, Phyloseq object (with all of them), Reads loss per step
+- [ ] Prevalence/abundance filtering (core members)
+
+### Diversity — beta
+- [ ] DESeq2 VST normalization + Euclidean distance matrix
+- [ ] PCoA ordination + sample dendrogram
+- [ ] PERMANOVA (adonis2) with covariates (batch, sex, age)
+- [ ] betadisper / PERMDISP dispersion test (required to interpret PERMANOVA correctly)
+- [ ] Make it on core members on
+  - [ ] ASV level
+  - [ ] Genera level
+
+### Diversity — alpha
+- [ ] Alpha metrics: Observed, Shannon, Simpson, Chao1 (questionable)
+- [ ] Hill numbers and curves
+- [ ] Group tests, covariate-adjusted (case/control)
+- [ ] Make it on core members on
+  - [ ] ASV level
+  - [ ] Genera level
+- [ ] Harden alpha/beta report to publish-ready
+
+### Differential abundance — ASVs
+- [ ] DESeq2 + MaAsLin2 on raw counts for core members on ASVs level and Genera level, covariate-adjusted (case/control)
+- [ ] Report, publish-ready
+
+### Functional prediction
+- [ ] PICRUSt2 pipeline → KO + pathway unstrat tables (max_nsti 2)
+- [ ] NSTI QC: report weighted / per-sample NSTI
+- [ ] Map KO to modules (GMM, KEGG) and pathways (especially KEGG)
+- [ ] Differential abundance for KO, pathways activity
+- [ ] Maybe use some signal molecules (such as SCFA) to predict impact of microbiome to host immune system
+- [ ] Functional report, publish-ready
+
+### Community structure
+- [ ] DMM clustering: assign community types
+  - [ ] Taxonomy level
+  - [ ] Functional level
+- [ ] Test community type ~ covariates
+  - [ ] Taxonomy level
+  - [ ] Functional level
+- [ ] Construct enterotypes
+- [ ] Report, publish-ready
+
+### Covariances analysis
+- [ ] Connect specific laboratory and physical metrics with specific genera and enterotype
+- [ ] Map of influence (taxa -> marker)
+- [ ] Report, publish-ready
+
+### Interaction networks
+- [ ] Per-group co-occurrence networks (SPIEC-EASI / SparCC, compositionality-aware)
+- [ ] Differential network analysis (e.g. NetCoMi) + hub / keystone taxa
+- [ ] Report, publish-ready
+
+### Cross-cutting (publish-readiness)
+- [ ] Lock covariate set (batch, sex, age; + antidepressants/PPIs/BMI/Bristol if available) and apply consistently across DA / DMM / networks
+- [ ] Consistent FDR across all DA blocks; report effect sizes, not only p-values
+- [ ] Fixed seeds for stochastic steps (DMM, SPIEC-EASI) + env/version locking (pixi / Apptainer) + sessionInfo
+- [ ] STORMS reporting checklist
+- [ ] Unified methods draft + consistent figure style
 
 ## Citation / license
 
