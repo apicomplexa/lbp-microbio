@@ -9,7 +9,6 @@ configfile: "config/config.yaml"
 
 
 include: "rules/common.smk"
-include: "rules/example.smk"
 
 
 if config["notify"]["telegram"]:
@@ -17,6 +16,23 @@ if config["notify"]["telegram"]:
     include: "rules/notify.smk"
 
 
-rule all:
+rule AssignBatches:
     input:
-        "<reports>/example_report.html",
+        config["samples_no_batch"],
+    output:
+        config["samples"],
+    run:
+        import pandas as pd
+        from random import shuffle
+
+        samples = pd.read_csv(input[0], index_col=config["samples_index_col"], sep="\t")
+        BATCH_SIZE = config["batch_size"]
+        if len(samples.index) % BATCH_SIZE < BATCH_SIZE * 0.7:
+            last_batch_size = len(samples) % BATCH_SIZE
+            extra_samples_to_batch = last_batch_size // (len(samples) // BATCH_SIZE) + 1
+            BATCH_SIZE += extra_samples_to_batch
+            print(f"Adjusted batch size to {BATCH_SIZE} to avoid small last batch (less then 70% of batch size)")
+        batches = [f"B{i // BATCH_SIZE+1}" for i in range(len(samples))]
+        shuffle(batches)
+        samples["batch"] = batches
+        samples.to_csv(output[0], sep="\t")

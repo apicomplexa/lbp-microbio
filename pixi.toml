@@ -80,6 +80,7 @@ init = { cmd = "bash utils/init_project.sh", description = "Turn the template in
 export-envs = { cmd = "python utils/export_envs.py", inputs = ["pixi.lock"], outputs = ["workflow/envs/*.yaml", "workflow/envs/*.pin.txt"], description = "Export rule environments to workflow/envs/" }
 
 workflow = { cmd = "snakemake", depends-on = ["export-envs"], description = "Run the workflow" }
+assign-batches = { cmd = "snakemake AssignBatches", depends-on = ["export-envs"], description = "Assign batches in samples.tsv" }
 dry-run = { cmd = "snakemake --dry-run", depends-on = ["export-envs"], description = "Show what would be executed" }
 unlock = { cmd = "snakemake --unlock", description = "Remove a stale Snakemake lock" }
 dag = { cmd = "mkdir -p results/reports && snakemake --dry-run --dag --quiet | sed -n '/^digraph/,$p' | dot -Tpdf > results/reports/workflow-dag.pdf", description = "Render the job DAG" }

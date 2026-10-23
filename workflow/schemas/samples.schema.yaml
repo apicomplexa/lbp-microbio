@@ -25,6 +25,10 @@ properties:
     type: string
     pattern: "^[SDE]RR[0-9]+$"
     description: SRA id of sequence run. Used as {sample}
+  batch:
+    type: string
+    pattern: "^B[0-9]+$"
+    description: Batch size. Already adjusted to avoid small last batch
   "Sample Name":
     type: string
     description: Unique patient id used in KYH study
@@ -261,4 +265,4 @@ properties:
     $ref: "#/$defs/number"
     description: Predicted muscle mass
 
-required: [Run, lpb_tertile]
+required: [Run, batch, lpb_tertile]

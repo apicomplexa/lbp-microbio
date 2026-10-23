@@ -3,8 +3,10 @@
 # HOW to run (cores, memory, conda, cluster) lives in workflow/profiles/.
 
 samples: config/samples.tsv
-
-batch_size: 100
+samples_no_batch: config/samples_no_batch.tsv
+samples_index_col: Run
+batch_size: 50
+rand_seed: 8092003
 
 # Snakemake pathvars: write "<results>/x.tsv" in rules instead of hard-coding
 # directories. Values may reference other pathvars.

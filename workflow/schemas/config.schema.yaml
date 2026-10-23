@@ -5,6 +5,21 @@ properties:
   samples:
     type: string
     description: Path to the sample sheet (TSV), see samples.schema.yaml
+  samples_no_batch:
+    type: string
+    description: Path to the temporal sample sheet (TSV) without batches labels
+  samples_index_col:
+    type: string
+    default: Run
+    description: Index column name of samples sheet
+  batch_size:
+    type: integer
+    default: 100
+    description: Default batch size. Will be recalculated if last batch less then 70% of default to avoid small last batch
+  rand_seed:
+    type: integer
+    default: 8092003
+    description: Seed for PRG
   pathvars:
     type: object
     description: Snakemake pathvars, used in rules as <name>
@@ -18,10 +33,4 @@ properties:
         type: boolean
         default: false
     default: {telegram: false}
-  example:
-    type: object
-    properties:
-      n_features: {type: integer, minimum: 1}
-      seed: {type: integer}
-    required: [n_features, seed]
-required: [samples, pathvars]
+required: [samples, samples_index_col, batch_size, rand_seed, pathvars]

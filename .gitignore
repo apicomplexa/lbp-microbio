@@ -14,7 +14,7 @@ data/**
 !data/*/.gitkeep
 resources/*
 !resources/README.md
-config/samples.tsv
+config/samples*.tsv
 
 # Outputs
 results/
