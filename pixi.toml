@@ -7,7 +7,7 @@
 # Never edit workflow/envs/* by hand — change this file, then re-export.
 
 [workspace]
-name = "snakemake-pixi-template"
+name = "lbp-microbio"
 version = "0.1.0"
 channels = ["conda-forge", "bioconda", "nodefaults"]
 platforms = ["linux-64"]

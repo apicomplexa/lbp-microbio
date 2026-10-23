@@ -5,6 +5,7 @@
 # Snakemake state, built rule envs, logs and benchmarks
 .snakemake/
 logs/
+**/*.log
 benchmarks/
 
 # Data and references: never committed. Directories are kept via .gitkeep/README.
@@ -13,6 +14,7 @@ data/**
 !data/*/.gitkeep
 resources/*
 !resources/README.md
+config/samples.tsv
 
 # Outputs
 results/

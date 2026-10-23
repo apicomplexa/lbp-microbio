@@ -4,6 +4,8 @@
 
 samples: config/samples.tsv
 
+batch_size: 100
+
 # Snakemake pathvars: write "<results>/x.tsv" in rules instead of hard-coding
 # directories. Values may reference other pathvars.
 pathvars:
@@ -17,8 +19,3 @@ pathvars:
 
 notify:
   telegram: false # see workflow/rules/notify.smk
-
-# Parameters of the example module (workflow/rules/example.smk) — delete with it.
-example:
-  n_features: 50
-  seed: 42

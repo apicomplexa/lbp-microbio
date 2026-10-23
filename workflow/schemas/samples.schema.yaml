@@ -1,12 +1,264 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
-description: One row per sample in the sample sheet (config/samples.tsv)
+description: >-
+  One row per sample in the sample sheet (config/samples.tsv). The sheet is read
+  with dtype=str, so numbers are validated as strings by pattern.
 type: object
+
+$defs:
+  integer:
+    type: string
+    pattern: "^[0-9]+$"
+  number:
+    type: string
+    pattern: "^-?([0-9]+\\.?[0-9]*|\\.[0-9]+)([eE][-+]?[0-9]+)?$"
+  # Assay results outside the detection range are stored as "<0.034", ">5", "<0,5".
+  censored_number:
+    type: string
+    pattern: "^[<>]?([0-9]+[.,]?[0-9]*|[.,][0-9]+)$"
+  yes_no:
+    type: string
+    enum: ["yes", "no"]
+
 properties:
-  sample_id:
+  # --- Identifiers -----------------------------------------------------------
+  Run:
     type: string
-    pattern: "^[A-Za-z0-9_-]+$"
-    description: Unique sample name, used as the {sample} wildcard
-  group:
+    pattern: "^[SDE]RR[0-9]+$"
+    description: SRA id of sequence run. Used as {sample}
+  "Sample Name":
     type: string
-    description: Experimental group
-required: [sample_id, group]
+    description: Unique patient id used in KYH study
+  Experiment:
+    type: string
+    pattern: "^[SDE]RX[0-9]+$"
+    description: SRA experiment accession
+  BioSample:
+    type: string
+    pattern: "^SAM[NED]A?[0-9]+$"
+    description: BioSample accession
+  BioProject:
+    type: string
+    pattern: "^PRJ[NED][A-Z][0-9]+$"
+    description: BioProject accession
+  "SRA Study":
+    type: string
+    pattern: "^[SDE]RP[0-9]+$"
+    description: SRA study accession
+  "Library Name":
+    type: string
+    description: Library name given by the submitter
+  ID_KYH:
+    $ref: "#/$defs/integer"
+    description: Participant ID number
+  new_id:
+    type: string
+    description: Double of Sample Name
+
+  # --- Sequencing run (SRA metadata) ----------------------------------------
+  "Assay Type":
+    type: string
+    description: Sequencing assay type (AMPLICON = 16S rRNA amplicon sequencing)
+  AvgSpotLen:
+    $ref: "#/$defs/integer"
+    description: Average spot (read pair) length in bases
+  Bases:
+    $ref: "#/$defs/integer"
+    description: Total number of bases in the run
+  Bytes:
+    $ref: "#/$defs/integer"
+    description: Size of the run file in bytes
+  BioSampleModel:
+    type: string
+    description: BioSample package / checklist (MIxS)
+  "Center Name":
+    type: string
+    description: Sequencing centre or submitting institution
+  Consent:
+    type: string
+    description: Data access level in SRA
+  "DATASTORE filetype":
+    type: string
+    description: File formats available for the run in SRA cloud storage
+  "DATASTORE provider":
+    type: string
+    description: Cloud providers hosting the run data
+  "DATASTORE region":
+    type: string
+    description: Cloud regions hosting the run data
+  Instrument:
+    type: string
+    description: Sequencing instrument model
+  Platform:
+    type: string
+    description: Sequencing platform
+  LibraryLayout:
+    type: string
+    enum: [PAIRED, SINGLE]
+    description: Library layout (paired-end or single-end reads)
+  LibrarySelection:
+    type: string
+    description: Library selection method (PCR = amplicon)
+  LibrarySource:
+    type: string
+    description: Library source material
+  Organism:
+    type: string
+    description: Source organism of the sequenced material
+  ReleaseDate:
+    type: string
+    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]{8}Z$"
+    description: Date the run was made public in SRA (UTC)
+  create_date:
+    type: string
+    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9:]{8}Z$"
+    description: Date the run was created in SRA (UTC)
+  version:
+    $ref: "#/$defs/integer"
+    description: Version of the SRA run record
+
+  # --- Sample / host context (MIxS) -----------------------------------------
+  Collection_Date:
+    type: string
+    description: Stool collection date range (ISO 8601 interval)
+  env_broad_scale:
+    type: string
+    description: MIxS broad-scale environmental context
+  env_local_scale:
+    type: string
+    description: MIxS local environmental context
+  env_medium:
+    type: string
+    description: MIxS environmental medium (sample material)
+  geo_loc_name_country:
+    type: string
+    description: Country of sampling
+  geo_loc_name_country_continent:
+    type: string
+    description: Continent of sampling
+  geo_loc_name:
+    type: string
+    description: Sampling location (country and region)
+  lat_lon:
+    type: string
+    description: Sampling site latitude and longitude
+  Host:
+    type: string
+    description: Host species
+  Host_age:
+    $ref: "#/$defs/number"
+    description: Host age in years at sampling
+  host_body_mass_index:
+    $ref: "#/$defs/number"
+    description: Host body mass index (kg/m^2)
+
+  # --- Study design ----------------------------------------------------------
+  case:
+    type: string
+    enum: [case, control]
+    description: UNUSED. Case / control status. It might be used in others part of project (not connected with microbiome)
+  s16:
+    $ref: "#/$defs/yes_no"
+    description: Sample has 16S rRNA amplicon data. Is always "yes" here
+  wgs17_175:
+    $ref: "#/$defs/yes_no"
+    description: Sample flag for the WGS subset
+  personage2357:
+    $ref: "#/$defs/integer"
+    description: unknown  # TODO add meaningful description
+  d_sex:
+    type: string
+    enum: [female, male]
+    description: Derived sex
+  hcd_obesity_kyh:
+    type: string
+    enum: ["bmi<30", "bmi>=30"]
+    description: Obesity status by BMI (threshold 30 kg/m^2)
+
+  # --- Lipopolysaccharide-binding protein and derived groups -----------------
+  lpb_tertile:
+    type: string
+    enum: [Низкий ЛПБ, Средний ЛПБ, Высокий ЛПБ]
+    description: LBP tertile group (low, middle, high)
+  lpb:
+    $ref: "#/$defs/number"
+    description: Serum lipopolysaccharide-binding protein (LBP), ng/mL
+  lpb_quartile:
+    type: string
+    enum: [1-й квартиль (Низкий), 2-й квартиль, 3-й квартиль, 4-й квартиль (Высокий)]
+    description: LBP quartile group (1st = lowest, 4th = highest)
+
+  # --- Laboratory markers ----------------------------------------------------
+  il6:
+    $ref: "#/$defs/censored_number"
+    description: Interleukin-6 as reported by the lab; values below the detection limit are "<0,5" # TODO confirm units
+  il6_num:
+    $ref: "#/$defs/number"
+    description: Numeric interleukin-6 (il6 with values below the detection limit replaced by 0.4) # TODO confirm units
+  folats:
+    $ref: "#/$defs/number"
+    description: Folate # TODO confirm units
+  homocysteine:
+    $ref: "#/$defs/number"
+    description: Homocysteine # TODO confirm units
+  adiponektin:
+    $ref: "#/$defs/censored_number"
+    description: Adiponectin; values outside the assay range are reported as "<0.034" or ">5" # TODO confirm units
+  lab_ms_chol:
+    $ref: "#/$defs/number"
+    description: Total cholesterol, mmol/L
+  lab_ms_hdl:
+    $ref: "#/$defs/number"
+    description: HDL cholesterol, mmol/L
+  lab_ms_ldl:
+    $ref: "#/$defs/number"
+    description: LDL cholesterol, mmol/L
+  lab_ms_trig:
+    $ref: "#/$defs/number"
+    description: Triglycerides, mmol/L
+  lab_ms_crphs:
+    $ref: "#/$defs/number"
+    description: High-sensitivity C-reactive protein, mg/L
+  lab_ms_cyc:
+    $ref: "#/$defs/number"
+    description: Cystatin C, mg/L
+  labd_ms_hba1c_ngsp:
+    $ref: "#/$defs/number"
+    description: HbA1c (%)
+  GFR:
+    $ref: "#/$defs/number"
+    description: Glomerular filtration rate # TODO confirm formula and units
+  gfr_cat:
+    type: string
+    enum: ["СКФ >= 60 (Норма)", "СКФ < 60 (Снижена)"]
+    description: GFR category (normal at 60 or above, reduced below 60)
+
+  # --- Anthropometry (health check) ------------------------------------------
+  hcd_bmi:
+    $ref: "#/$defs/number"
+    description: Body mass index
+  hcd_weight_kg:
+    $ref: "#/$defs/number"
+    description: Weight (kg)
+  hcd_mean_waist_circ:
+    $ref: "#/$defs/number"
+    description: Mean waist circumference
+  hcd_mean_hip_circ:
+    $ref: "#/$defs/number"
+    description: Mean hip circumference
+  hcd_waist_hip_ratio:
+    $ref: "#/$defs/number"
+    description: Waist to hip ratio
+  hc_tan_fatm:
+    $ref: "#/$defs/number"
+    description: Fat mass
+  hc_tan_fatp:
+    $ref: "#/$defs/number"
+    description: Fat percentage
+  hc_tan_ffm:
+    $ref: "#/$defs/number"
+    description: Fat free mass
+  hc_tan_pmm:
+    $ref: "#/$defs/number"
+    description: Predicted muscle mass
+
+required: [Run, lpb_tertile]
