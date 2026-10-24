@@ -12,6 +12,7 @@ rand_seed: 8092003
 # directories. Values may reference other pathvars.
 pathvars:
   data_raw: data/raw
+  samples: data/samples
   temp: data/temp
   resources: resources
   results: results
@@ -21,3 +22,9 @@ pathvars:
 
 notify:
   telegram: false # see workflow/rules/notify.smk
+
+trimming:
+  trunc_len_f: 230
+  trunc_len_r: 230
+  max_ee_f: 10
+  max_ee_r: 10

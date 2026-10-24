@@ -33,4 +33,25 @@ properties:
         type: boolean
         default: false
     default: {telegram: false}
-required: [samples, samples_index_col, batch_size, rand_seed, pathvars]
+  trimming:
+    type: object
+    properties:
+      trunc_len_f:
+        type: integer
+        description: Target length of forward reads
+      trunc_len_r:
+        type: integer
+        description: Target length of reverse reads
+      max_ee_f:
+        type: integer
+        description: Per read error threshold for forward reads
+      max_ee_r:
+        type: integer
+        description: Per read error threshold for reverse reads
+required:
+  - samples
+  - samples_index_col
+  - batch_size
+  - rand_seed
+  - pathvars
+  - trimming

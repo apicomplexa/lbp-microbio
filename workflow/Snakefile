@@ -9,11 +9,17 @@ configfile: "config/config.yaml"
 
 
 include: "rules/common.smk"
+include: "rules/load_and_filter.smk"
 
 
 if config["notify"]["telegram"]:
 
     include: "rules/notify.smk"
+
+
+rule all:
+    input:
+        reports_trim=expand("<reports>/qc/filterAndTrim/report_{sample}.tsv", sample=SAMPLES.index),
 
 
 rule AssignBatches:
