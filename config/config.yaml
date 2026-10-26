@@ -11,7 +11,6 @@ rand_seed: 8092003
 # Snakemake pathvars: write "<results>/x.tsv" in rules instead of hard-coding
 # directories. Values may reference other pathvars.
 pathvars:
-  data_raw: data/raw
   samples: data/samples
   temp: data/temp
   resources: resources
@@ -19,6 +18,9 @@ pathvars:
   reports: <results>/reports
   figures: <results>/figures
   logs: logs
+
+resources:
+  silva_db: resources/SILVA_SSU_r138.2_v2.RData
 
 notify:
   telegram: false # see workflow/rules/notify.smk

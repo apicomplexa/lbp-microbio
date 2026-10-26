@@ -38,6 +38,8 @@ r-tidyverse = ">=2.0.0,<3"
 r-knitr = ">=1.52,<2"
 r-rmarkdown = ">=2.32,<3"
 quarto = ">=1.9.38,<2"
+r-dplyr = ">=1.2.1,<2"
+r-ggpubr = ">=1.0.0,<2"
 
 [feature.py.dependencies]
 python = ">=3.13,<3.14"
@@ -50,6 +52,12 @@ cutadapt = { version = "==5.2", channel = "bioconda" }
 
 [feature.dada2.dependencies]
 bioconductor-dada2 = { version = "==1.38.0", channel = "bioconda" }
+bioconductor-decipher = { version = "==3.6.0", channel = "bioconda" }
+
+[feature.eco.dependencies]
+bioconductor-phyloseq = { version = ">=1.54.0,<2", channel = "bioconda" }
+r-vegan = ">=2.7_3,<3"
+r-dendextend = { version = ">=1.19.1,<2", channel = "conda-forge" }
 
 # ---------------------------------------------------------------------------
 # Developer tooling: kernels, language servers, linters, formatters.
@@ -74,10 +82,12 @@ pre-commit = ">=4.7.0,<5"
 # pinned to an old Python) — give it its own solve-group or none.
 # ---------------------------------------------------------------------------
 [environments]
-default = { features = ["r", "py", "dev"], solve-group = "main" }
+default = { features = ["r", "py", "dev", "dada2"], solve-group = "main" }
 r = { features = ["r"], no-default-feature = true, solve-group = "main" }
 py = { features = ["py"], no-default-feature = true, solve-group = "main" }
 load-samples = { features = [ "load_and_trim", "dada2" ], no-default-feature = true, solve-group = "main" }
+dada2-pipe = { features = [ "dada2" ], no-default-feature = true, solve-group = "main" }
+dada2-save = { features = [ "r", "dada2", "eco" ], no-default-feature = true, solve-group = "main"  }
 
 # ---------------------------------------------------------------------------
 # Tasks. Extra CLI args are appended, e.g. `pixi run workflow --cores 16`.

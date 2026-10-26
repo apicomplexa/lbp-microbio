@@ -7,5 +7,5 @@ channels:
 dependencies:
 - sra-tools ==3.4.1
 - bioconda::cutadapt ==5.2
-- pigz >=2.8,<3
 - bioconda::bioconductor-dada2 ==1.38.0
+- bioconda::bioconductor-decipher ==3.6.0

@@ -20,7 +20,12 @@ if samples_sheet.is_file():
 
     wildcard_constraints:
         sample="|".join(SAMPLES.index),
-        batch="|".join(SAMPLES.batch),
+        batch="|".join(SAMPLES["batch"].unique()),
 
-    def sample_group(wildcards):
-        return SAMPLES.loc[wildcards.sample, "batch"]
+
+def sample_group(wildcards):
+    return SAMPLES.loc[wildcards.sample, "batch"]
+
+
+def samples_by_group(wildcards):
+    return SAMPLES[SAMPLES["batch"] == wildcards.batch]

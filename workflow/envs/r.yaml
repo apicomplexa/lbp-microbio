@@ -10,3 +10,5 @@ dependencies:
 - r-knitr >=1.52,<2
 - r-rmarkdown >=2.32,<3
 - quarto >=1.9.38,<2
+- r-dplyr >=1.2.1,<2
+- r-ggpubr >=1.0.0,<2
