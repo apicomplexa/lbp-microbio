@@ -3,6 +3,8 @@ library(tibble)
 library(tidyr)
 library(rlang)
 
+source("workflow/scripts/plots/plots_pallet.R")
+
 plot_reads_loss <- function(
   metadata_df,
   color_condition,
@@ -19,7 +21,7 @@ plot_reads_loss <- function(
   )
   group <- factor(group)
   group_levels <- levels(group)
-  group_colors <- setNames(hcl.colors(length(group_levels), palette = "Dark 3"), group_levels)
+  group_colors <- setNames(palette(group_levels), group_levels)
 
   reads_loss_data <- read.csv(reads_loss_file, sep = "\t", row.names = 1)
   stages <- c("input", "filtered", "merged", "nochim", "nochim_nozero")
@@ -30,15 +32,15 @@ plot_reads_loss <- function(
     stringsAsFactors = FALSE
   )
 
-  reads_loss_long <- reads_loss_data[stages] %>%
-    rownames_to_column("sample") %>%
+  reads_loss_long <- reads_loss_data[stages] |>
+    rownames_to_column("sample") |>
     pivot_longer(
       cols = all_of(stages),
       names_to = "stage",
       values_to = "read_count"
-    ) %>%
-    mutate(stage = factor(stage, levels = stages)) %>%
-    arrange(sample, stage) %>%
+    ) |>
+    mutate(stage = factor(stage, levels = stages)) |>
+    arrange(sample, stage) |>
     left_join(group_df, by = "sample")
 
   plot <- ggplot(reads_loss_long, aes(x = stage, y = read_count, group = sample, color = group)) +
@@ -72,8 +74,8 @@ plot_reads_loss <- function(
     cat(sprintf("\nPlot saved to: %s\n", plot_file))
   }
 
-  red_zone_samples <- reads_loss_data[stages] %>%
-    apply(1, min) %>%
+  red_zone_samples <- reads_loss_data[stages] |>
+    apply(1, min) |>
     {
       names(.[. < 1000])
     }
