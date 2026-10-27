@@ -12,6 +12,11 @@ workflow/envs/*.yaml linguist-generated=true
 Snakefile linguist-language=Snakemake
 *.qmd linguist-detectable=true
 
+# Notebooks: outputs, execution counts and volatile metadata are stripped on
+# `git add` (clean filter) but kept in the working copy. Filter is defined in
+# .git/config by `pixi run hooks`; without it git stores notebooks unchanged.
+*.ipynb filter=nbstripout diff=ipynb
+
 # Binary formats
 *.pdf binary
 *.png binary

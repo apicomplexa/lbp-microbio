@@ -12,3 +12,4 @@ dependencies:
 - quarto >=1.9.38,<2
 - r-dplyr >=1.2.1,<2
 - r-ggpubr >=1.0.0,<2
+- conda-forge::r-ggside >=0.4.1,<0.5

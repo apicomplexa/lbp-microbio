@@ -40,6 +40,7 @@ r-rmarkdown = ">=2.32,<3"
 quarto = ">=1.9.38,<2"
 r-dplyr = ">=1.2.1,<2"
 r-ggpubr = ">=1.0.0,<2"
+r-ggside = { version = ">=0.4.1,<0.5", channel = "conda-forge" }
 
 [feature.py.dependencies]
 python = ">=3.13,<3.14"
@@ -58,6 +59,10 @@ bioconductor-decipher = { version = "==3.6.0", channel = "bioconda" }
 bioconductor-phyloseq = { version = ">=1.54.0,<2", channel = "bioconda" }
 r-vegan = ">=2.7_3,<3"
 r-dendextend = { version = ">=1.19.1,<2", channel = "conda-forge" }
+bioconductor-microbiome = { version = ">=1.32.0,<2", channel = "bioconda" }
+
+[feature.deseq2.dependencies]
+bioconductor-deseq2 = { version = ">=1.50.2,<2", channel = "bioconda" }
 
 # ---------------------------------------------------------------------------
 # Developer tooling: kernels, language servers, linters, formatters.
@@ -73,6 +78,7 @@ air = ">=0.12.0,<0.13"
 ruff = ">=0.17.1,<0.18"
 snakefmt = ">=2.1.0,<3"
 pre-commit = ">=4.7.0,<5"
+nbstripout = ">=0.9.1,<0.10"
 
 # ---------------------------------------------------------------------------
 # Environments. A shared solve-group guarantees that a package present in
@@ -82,7 +88,7 @@ pre-commit = ">=4.7.0,<5"
 # pinned to an old Python) — give it its own solve-group or none.
 # ---------------------------------------------------------------------------
 [environments]
-default = { features = ["r", "py", "dev", "dada2"], solve-group = "main" }
+default = { features = ["r", "py", "dev", "dada2", "eco", "deseq2"], solve-group = "main" }
 r = { features = ["r"], no-default-feature = true, solve-group = "main" }
 py = { features = ["py"], no-default-feature = true, solve-group = "main" }
 load-samples = { features = [ "load_and_trim", "dada2" ], no-default-feature = true, solve-group = "main" }
@@ -106,4 +112,4 @@ sm-report = { cmd = "snakemake --report results/reports/snakemake-report.html", 
 
 fmt = { cmd = "ruff format workflow utils && ruff check --fix workflow utils && snakefmt workflow && air format workflow", description = "Format Python, Snakemake and R code" }
 lint = { cmd = "ruff check workflow utils && snakefmt --check workflow && snakemake --lint && Rscript -e 'quit(status = length(lintr::lint_dir(\"workflow\")) > 0)'", description = "Lint everything (no changes)" }
-hooks = { cmd = "pre-commit install", description = "Install git pre-commit hooks" }
+hooks = { cmd = "pre-commit install && nbstripout --install --attributes .git/info/attributes", description = "Install git pre-commit hooks and the notebook output-stripping filter" }

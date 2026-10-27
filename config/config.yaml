@@ -23,7 +23,7 @@ resources:
   silva_db: resources/SILVA_SSU_r138.2_v2.RData
 
 notify:
-  telegram: false # see workflow/rules/notify.smk
+  telegram: true # see workflow/rules/notify.smk
 
 trimming:
   trunc_len_f: 230
