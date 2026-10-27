@@ -48,6 +48,16 @@ properties:
       max_ee_r:
         type: integer
         description: Per read error threshold for reverse reads
+  dada2:
+    type: object
+    properties:
+      pooling:
+        oneOf:
+          - type: boolean
+          - type: string
+            enum: [pseudo]
+        default: false
+        description: Sample pooling for dada() - true, false or "pseudo"
 required:
   - samples
   - samples_index_col

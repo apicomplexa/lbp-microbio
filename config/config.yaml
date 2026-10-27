@@ -1,3 +1,4 @@
+# $schema: ../workflow/schemas/config.schema.yaml
 # Analysis parameters — WHAT to analyse. Validated against
 # workflow/schemas/config.schema.yaml; keys are described in config/README.md.
 # HOW to run (cores, memory, conda, cluster) lives in workflow/profiles/.
@@ -30,3 +31,6 @@ trimming:
   trunc_len_r: 230
   max_ee_f: 10
   max_ee_r: 10
+
+dada2:
+  pooling: false

@@ -75,7 +75,7 @@ plot_reads_loss <- function(
   }
 
   red_zone_samples <- reads_loss_data[stages] |>
-    apply(1, min) |>
+    apply(1, min) %>%
     {
       names(.[. < 1000])
     }
