@@ -10,7 +10,28 @@ import urllib.request
 from collections import deque
 
 
-def _tail(path, n=15, max_chars=3500):
+def _load_dotenv(path=".env"):
+    # Snakemake does not read .env itself; already exported variables win.
+    if not os.path.exists(path):
+        return
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.removeprefix("export ").split("=", 1)
+            os.environ.setdefault(key.strip(), value.strip().strip("'\""))
+
+
+_load_dotenv()
+
+
+envvars:
+    "TG_BOT_TOKEN",
+    "TG_CHAT_ID",
+
+
+def _tail(path, n=30, max_chars=3500):
     try:
         with open(path, errors="replace") as f:
             text = "".join(deque(f, maxlen=n)).rstrip()

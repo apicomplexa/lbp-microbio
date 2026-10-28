@@ -88,21 +88,21 @@ git add pixi.toml pixi.lock workflow/envs
 ## Roadmap
 
 ### Upstream & ASV inference
-- [ ] SRA download + primer trimming (cutadapt) + DADA2 quality filtering, with QC reports
+- [x] SRA download + primer trimming (cutadapt) + DADA2 quality filtering, with QC reports
 - [ ] Contaminant removal (+ mitochondrial and plasmid DNA)
-- [ ] Error models + per-batch ASV calling (DADA2), batch merge, chimera removal
-- [ ] Taxonomy assignment (DECIPHER IdTaxa vs SILVA SSU r138.2)
-- [ ] Results export: ASVs sequences (fasta), ASVs counts per sample, ASV taxonomy tab, Phyloseq object (with all of them), Reads loss per step
+- [x] Error models + per-batch ASV calling (DADA2), batch merge, chimera removal
+- [x] Taxonomy assignment (DECIPHER IdTaxa vs SILVA SSU r138.2)
+- [x] Results export: ASVs sequences (fasta), ASVs counts per sample, ASV taxonomy tab, Phyloseq object (with all of them), Reads loss per step
 - [ ] Prevalence/abundance filtering (core members)
 
 ### Diversity — beta
-- [ ] DESeq2 VST normalization + Euclidean distance matrix
-- [ ] PCoA ordination + sample dendrogram
-- [ ] PERMANOVA (adonis2) with covariates (batch, sex, age)
-- [ ] betadisper / PERMDISP dispersion test (required to interpret PERMANOVA correctly)
-- [ ] Make it on core members on
-  - [ ] ASV level
-  - [ ] Genera level
+- [x] DESeq2 VST normalization + Euclidean distance matrix
+- [x] PCoA ordination + sample dendrogram
+- [x] PERMANOVA (adonis2) with covariates (batch, sex, age)
+- [x] betadisper / PERMDISP dispersion test (required to interpret PERMANOVA correctly)
+- [x] Make it on core members on
+  - [x] ASV level
+  - [x] Genera level
 
 ### Diversity — alpha
 - [ ] Alpha metrics: Observed, Shannon, Simpson, Chao1 (questionable)

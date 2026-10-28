@@ -13,6 +13,7 @@ dependencies:
 - r-dplyr >=1.2.1,<2
 - r-ggpubr >=1.0.0,<2
 - conda-forge::r-ggside >=0.4.1,<0.5
+- conda-forge::r-patchwork >=1.3.2,<2
 - bioconda::bioconductor-dada2 ==1.38.0
 - bioconda::bioconductor-decipher ==3.6.0
 - bioconda::bioconductor-phyloseq >=1.54.0,<2

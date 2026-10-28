@@ -21,9 +21,11 @@
     },
 
     // Python (pixi-code registers pixi envs with the Python Environments extension)
-    "python-envs.defaultEnvManager": "renan-r-santos.pixi-code:pixi",
-    "python-envs.defaultPackageManager": "renan-r-santos.pixi-code:pixi",
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python-envs.defaultPackageManager": "ms-python.python:pip",
     "python.defaultInterpreterPath": "${workspaceFolder}/.pixi/envs/default/bin/python",
+    // Use ruff pinned in pixi, not the one bundled with the extension
+    "ruff.path": ["${workspaceFolder}/.pixi/envs/default/bin/ruff"],
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.formatOnSave": true
@@ -50,5 +52,9 @@
     // Notebooks run from the repo root, like rules and Quarto reports
     "jupyter.notebookFileRoot": "${workspaceFolder}",
     "notebook.workingDirectory": "${workspaceFolder}",
-    "quarto.render.previewType": "internal"
+    "quarto.render.previewType": "internal",
+    "cSpell.words": [
+        "ntaxa",
+        "tertile"
+    ]
 }
