@@ -22,6 +22,8 @@ rule AVSCalling:
     output:
         seqtab=temp("<temp>/batch/{batch}/seqtab.rds"),
         dada2=temp("<temp>/batch/{batch}/dada2.rds"),
+    conda:
+        "../envs/dada2-pipe.yaml"
     threads: 8
     resources:
         mem_mb=10000,
