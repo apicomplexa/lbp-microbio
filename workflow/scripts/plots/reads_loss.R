@@ -21,7 +21,7 @@ plot_reads_loss <- function(
   )
   group <- factor(group)
   group_levels <- levels(group)
-  group_colors <- setNames(palette(group_levels), group_levels)
+  group_colors <- setNames(my_palette(length(group_levels)), group_levels)
 
   reads_loss_data <- read.csv(reads_loss_file, sep = "\t", row.names = 1)
   stages <- c("input", "filtered", "merged", "nochim", "nochim_nozero")

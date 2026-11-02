@@ -6,8 +6,10 @@ err_r2 <- readRDS(snakemake@input$error_r2)
 derep_r1 <- derepFastq(snakemake@input$r1)
 derep_r2 <- derepFastq(snakemake@input$r2)
 
-dada_r1 <- dada(derep_r1, err = err_r1, pool = snakemake@config["dada2"]["pooling"], multithread = snakemake@threads)
-dada_r2 <- dada(derep_r2, err = err_r2, pool = snakemake@config["dada2"]["pooling"], multithread = snakemake@threads)
+print(snakemake@config$dada2$pooling)
+
+dada_r1 <- dada(derep_r1, err = err_r1, pool = snakemake@config$dada2$pooling, multithread = snakemake@threads)
+dada_r2 <- dada(derep_r2, err = err_r2, pool = snakemake@config$dada2$pooling, multithread = snakemake@threads)
 
 merged_asv <- mergePairs(
   dada_r1,

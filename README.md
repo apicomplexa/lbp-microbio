@@ -105,16 +105,16 @@ git add pixi.toml pixi.lock workflow/envs
   - [x] Genera level
 
 ### Diversity — alpha
-- [ ] Alpha metrics: Observed, Shannon, Simpson, Chao1 (questionable)
-- [ ] Hill numbers and curves
-- [ ] Group tests, covariate-adjusted (case/control)
-- [ ] Make it on core members on
-  - [ ] ASV level
-  - [ ] Genera level
+- [x] Alpha metrics: Observed, Shannon, Simpson, Chao1 (questionable)
+- [x] Hill numbers and curves
+- [x] Group tests, covariate-adjusted (case/control)
+- [x] Make it on core members on
+  - [x] ASV level
+  - [x] Genera level
 - [ ] Harden alpha/beta report to publish-ready
 
 ### Differential abundance — ASVs
-- [ ] DESeq2 + MaAsLin2 on raw counts for core members on ASVs level and Genera level, covariate-adjusted (case/control)
+- [-] DESeq2 + MaAsLin2 on raw counts for core members on ASVs level and Genera level, covariate-adjusted (case/control)
 - [ ] Report, publish-ready
 
 ### Functional prediction

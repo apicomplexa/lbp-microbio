@@ -6,7 +6,7 @@
 samples: config/samples.tsv
 samples_no_batch: config/samples_no_batch.tsv
 samples_index_col: Run
-batch_size: 50
+batch_size: 20
 rand_seed: 8092003
 
 # Snakemake pathvars: write "<results>/x.tsv" in rules instead of hard-coding
@@ -33,4 +33,4 @@ trimming:
   max_ee_r: 10
 
 dada2:
-  pooling: false
+  pooling: true

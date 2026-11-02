@@ -56,5 +56,14 @@
     "cSpell.words": [
         "ntaxa",
         "tertile"
-    ]
+    ],
+    "python-envs.pythonProjects": [
+        {
+            "path": ".",
+            "envManager": "renan-r-santos.pixi-code:pixi",
+            "packageManager": "renan-r-santos.pixi-code:pixi"
+        }
+    ],
+    "r.consolePath": "${workspaceFolder}/.pixi/envs/default/bin/R",
+    "r.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/R"
 }

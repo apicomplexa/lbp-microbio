@@ -65,6 +65,9 @@ bioconductor-microbiome = { version = ">=1.32.0,<2", channel = "bioconda" }
 [feature.deseq2.dependencies]
 bioconductor-deseq2 = { version = ">=1.50.2,<2", channel = "bioconda" }
 
+[feature.maaslin.dependencies]
+bioconductor-maaslin2 = { channel = "bioconda" }
+
 # ---------------------------------------------------------------------------
 # Developer tooling: kernels, language servers, linters, formatters.
 # Never exported to workflow/envs.
@@ -80,6 +83,10 @@ ruff = ">=0.17.1,<0.18"
 snakefmt = ">=2.1.0,<3"
 pre-commit = ">=4.7.0,<5"
 nbstripout = ">=0.9.1,<0.10"
+arf = { version = ">=0.6.0,<0.7", channel = "conda-forge" }
+
+[feature.fa.dependencies]
+picrust2 = { channel = "bioconda" }
 
 # ---------------------------------------------------------------------------
 # Environments. A shared solve-group guarantees that a package present in
@@ -89,12 +96,14 @@ nbstripout = ">=0.9.1,<0.10"
 # pinned to an old Python) — give it its own solve-group or none.
 # ---------------------------------------------------------------------------
 [environments]
-default = { features = ["r", "py", "dev", "dada2", "eco", "deseq2"], solve-group = "main" }
+default = { features = ["r", "py", "dev", "eco", "deseq2", "maaslin"], solve-group = "main" }
 r = { features = ["r"], no-default-feature = true, solve-group = "main" }
 py = { features = ["py"], no-default-feature = true, solve-group = "main" }
 load-samples = { features = [ "load_and_trim", "dada2" ], no-default-feature = true, solve-group = "main" }
 dada2-pipe = { features = [ "dada2" ], no-default-feature = true, solve-group = "main" }
 dada2-save = { features = [ "r", "dada2", "eco" ], no-default-feature = true, solve-group = "main"  }
+func = { features = [ "fa" ], no-default-feature = true, solve-group = "main"  }
+
 
 # ---------------------------------------------------------------------------
 # Tasks. Extra CLI args are appended, e.g. `pixi run workflow --cores 16`.

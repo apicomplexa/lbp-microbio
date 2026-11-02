@@ -1,0 +1,59 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "/home/apicomplexa/Documents/projects/03_Science_and_Education/kyh_microbio_depression"
+		}
+	],
+	    // Python (pixi-code registers pixi envs with the Python Environments extension)
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python-envs.defaultPackageManager": "ms-python.python:pip",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.pixi/envs/default/bin/python",
+    // Use ruff pinned in pixi, not the one bundled with the extension
+    "ruff.path": ["${workspaceFolder}/.pixi/envs/default/bin/ruff"],
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true
+    },
+
+    // R — VS Code (REditorSupport). Positron: pick the interpreter from
+    // .pixi/envs/default via the interpreter picker; Positron also scans the
+    // folders listed in positron.r.customRootFolders.
+    "r.rpath.linux": "${workspaceFolder}/.pixi/envs/default/bin/R",
+    "r.rterm.linux": "${workspaceFolder}/.pixi/envs/default/bin/R",
+    "r.libPaths": ["${workspaceFolder}/.pixi/envs/default/lib/R/library"],
+    "r.alwaysUseActiveTerminal": false,
+    "r.useRenvLibPath": false,
+    "r.lsp.diagnostics": true,
+    "positron.r.customRootFolders": ["${workspaceFolder}/.pixi/envs"],
+    "[r]": {
+        "editor.defaultFormatter": "Posit.air-vscode",
+        "editor.formatOnSave": true
+    },
+    "[quarto]": {
+        "editor.formatOnSave": false
+    },
+
+    // Notebooks run from the repo root, like rules and Quarto reports
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "notebook.workingDirectory": "${workspaceFolder}",
+    "quarto.render.previewType": "internal",
+    "cSpell.words": [
+        "ntaxa",
+        "tertile"
+    ],
+    "python-envs.pythonProjects": [
+        {
+            "path": ".",
+            "envManager": "renan-r-santos.pixi-code:pixi",
+            "packageManager": "renan-r-santos.pixi-code:pixi"
+        }
+    ],
+    "r.consolePath": "${workspaceFolder}/.pixi/envs/default/bin/R",
+    "r.executablePath": "${workspaceFolder}/.pixi/envs/default/bin/R",
+    "settings": {
+        "r.interactive.arfPath": "/home/apicomplexa/Documents/projects/lbp-microbio/.pixi/envs/default/bin/arf"
+    }
+}

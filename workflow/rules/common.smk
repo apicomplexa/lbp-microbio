@@ -22,6 +22,9 @@ if samples_sheet.is_file():
         sample="|".join(SAMPLES.index),
         batch="|".join(SAMPLES["batch"].unique()),
 
+else:
+    SAMPLES = []
+
 
 def sample_group(wildcards):
     return SAMPLES.loc[wildcards.sample, "batch"]
