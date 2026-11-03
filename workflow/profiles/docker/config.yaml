@@ -1,0 +1,29 @@
+# Execution settings for the Docker image (see docker/README.md): one big
+# workstation, ~50 GB RAM, every core the container is given.
+# Used by docker/entrypoint.sh as --workflow-profile; extra args passed to
+# run-pipeline.sh override these (e.g. `--cores 16`).
+software-deployment-method:
+  - conda
+# Rule envs are pre-built into the image at this path (see Dockerfile)
+conda-prefix: /opt/snakemake-conda
+cores: all
+resources:
+  - mem_mb=50000
+  # at most 6 parallel SRA downloads, to avoid being throttled by NCBI
+  - sra_conn=6
+set-resources:
+  LoadFastqBySRR:
+    sra_conn: 1
+  FunctionalAnalysis:
+    mem_mb: 30000
+# Single serial bottleneck jobs: give them more threads than the rule default
+# (capped by --cores automatically)
+set-threads:
+  ChimeraRemoval: 16
+  AssignTaxonomy: 16
+  FunctionalAnalysis: 16
+rerun-incomplete: true
+keep-going: true
+printshellcmds: true
+show-failed-logs: true
+latency-wait: 30

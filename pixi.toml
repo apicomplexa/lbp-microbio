@@ -98,6 +98,8 @@ picrust2 = { channel = "bioconda" }
 # ---------------------------------------------------------------------------
 [environments]
 default = { features = ["r", "py", "dev", "eco", "deseq2", "maaslin"], solve-group = "main" }
+# Workflow runner only (Snakemake + conda, no R/dev tooling): used by the Docker image
+runner = { features = [], solve-group = "main" }
 r = { features = ["r"], no-default-feature = true, solve-group = "main" }
 py = { features = ["py"], no-default-feature = true, solve-group = "main" }
 load-samples = { features = [ "load_and_trim", "dada2" ], no-default-feature = true, solve-group = "main" }

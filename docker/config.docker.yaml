@@ -1,0 +1,9 @@
+# Overrides of config/config.yaml inside the Docker image, applied with
+# --configfile by docker/entrypoint.sh. Everything else comes from config/config.yaml.
+
+# The sample sheet is mounted read-only by run-pipeline.sh; it is never part of the image.
+samples: /input/samples.tsv
+
+# No access to the Telegram API on the target machine
+notify:
+  telegram: false

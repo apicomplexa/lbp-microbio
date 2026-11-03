@@ -16,6 +16,9 @@ pixi run dry-run             # what would be executed
 pixi run workflow            # run; extra args are passed to snakemake, e.g. --cores 16
 ```
 
+On another machine with only Docker: `./run-pipeline.sh /path/to/samples.tsv`
+runs reads → PICRUSt2 and leaves `lbp-run/results.zip` (see [docker/README.md](docker/README.md)).
+
 Other tasks: `pixi run dag` (job graph → `results/reports/workflow-dag.pdf`),
 `pixi run sm-report`, `pixi run lint`, `pixi run fmt`; `pixi task list` shows all.
 

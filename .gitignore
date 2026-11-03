@@ -18,6 +18,8 @@ config/samples*.tsv
 
 # Outputs
 results/
+# Docker runs (run-pipeline.sh): working dir with data, results and results.zip
+/lbp-run/
 
 # Quarto / Jupyter / R
 .quarto/

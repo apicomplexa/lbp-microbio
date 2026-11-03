@@ -1,0 +1,16 @@
+# Whitelist: the build context holds only code. Sample sheets, clinical data,
+# reference DBs, results and secrets must never reach the image.
+*
+!pixi.toml
+!pixi.lock
+!workflow/
+!config/config.yaml
+!docker/
+# re-exclude anything that could appear inside whitelisted dirs
+**/samples*.tsv
+**/.env
+**/*.dta
+**/*.xlsx
+**/*.RData
+**/__pycache__
+workflow/notebooks/
