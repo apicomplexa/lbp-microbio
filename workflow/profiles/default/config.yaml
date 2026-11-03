@@ -7,7 +7,7 @@ software-deployment-method:
   - conda
 cores: 4
 resources:
-  - mem_mb=8000
+  - mem_mb=10000
 rerun-incomplete: true
 printshellcmds: true
 show-failed-logs: true

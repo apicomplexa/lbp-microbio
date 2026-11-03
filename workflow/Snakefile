@@ -11,6 +11,7 @@ configfile: "config/config.yaml"
 include: "rules/common.smk"
 include: "rules/load_and_filter.smk"
 include: "rules/dada2.smk"
+include: "rules/fa.smk"
 
 
 if config["notify"]["telegram"]:
@@ -20,7 +21,7 @@ if config["notify"]["telegram"]:
 
 rule all:
     input:
-        reports_trim=expand("<reports>/qc/filterAndTrim/report_{sample}.tsv", sample=SAMPLES.index),
+        ko="<results>/picrust2/KO_metagenome_out/pred_metagenome_unstrat.tsv.gz",
         ps_raw="<temp>/ps_raw.rds",
 
 
