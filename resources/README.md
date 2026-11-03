@@ -9,4 +9,4 @@ table below — or better, download it with a rule so the workflow can rebuild i
 
 | File | Source / version | Obtained |
 |---|---|---|
-| | | |
+| `SILVA_SSU_r138.2_v2.RData` | DECIPHER IdTaxa training set, SILVA SSU r138.2 ([decipher.codes/Downloads](https://decipher.codes/Downloads.html), Google Drive). Downloaded by rule `DownloadSilva`; SHA-256 in `config/config.yaml` | automatically |

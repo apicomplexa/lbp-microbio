@@ -22,6 +22,10 @@ pathvars:
 
 resources:
   silva_db: resources/SILVA_SSU_r138.2_v2.RData
+  # DECIPHER IdTaxa training set, linked from https://decipher.codes/Downloads.html
+  # (Google Drive file 1w3wdSCpSihntWkbP_zvXz7r3s-tNB8DV; confirm=t skips the virus-scan page)
+  silva_db_url: https://drive.usercontent.google.com/download?id=1w3wdSCpSihntWkbP_zvXz7r3s-tNB8DV&export=download&confirm=t
+  silva_db_sha256: 61b0ba4b2db6e2c1318e7781d3e76f60a0673729fbb85754430660940f16b027
 
 notify:
   telegram: true # see workflow/rules/notify.smk

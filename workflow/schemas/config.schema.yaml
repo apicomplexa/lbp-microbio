@@ -26,6 +26,20 @@ properties:
     additionalProperties:
       type: string
     required: [results, logs, temp, reports, figures]
+  resources:
+    type: object
+    properties:
+      silva_db:
+        type: string
+        description: Local path to the SILVA DECIPHER (IdTaxa) training set
+      silva_db_url:
+        type: string
+        description: URL the SILVA training set is downloaded from if silva_db is missing
+      silva_db_sha256:
+        type: string
+        pattern: "^[0-9a-f]{64}$"
+        description: Expected SHA-256 of the downloaded SILVA training set
+    required: [silva_db, silva_db_url, silva_db_sha256]
   notify:
     type: object
     properties:

@@ -22,6 +22,7 @@ snakemake = ">=9.27.0,<10"
 pandas = ">=2.3.3,<3"
 conda = ">=26.7.3,<27"     # Snakemake builds rule envs with conda
 graphviz = ">=14.1.2,<15"  # `pixi run dag`
+snakemake-storage-plugin-http = ">=0.3.1,<0.4"
 
 # Applies to the conda that Snakemake calls, without touching ~/.condarc
 [activation.env]
