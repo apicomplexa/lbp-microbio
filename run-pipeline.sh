@@ -4,8 +4,8 @@
 #   ./run-pipeline.sh /path/to/samples.tsv [extra snakemake args, e.g. --cores 16]
 #
 # Builds the image on first use, works in ./lbp-run/ (override: LBP_WORKDIR=/big/disk/run)
-# and leaves the result in <workdir>/results.zip and <workdir>/data_temp.zip.
-# Rerunning the same command resumes an interrupted run. Details: docker/README.md.
+# and leaves the result in <workdir>/results.zip. Rerunning the same command
+# resumes an interrupted run. Details: docker/README.md.
 set -euo pipefail
 
 REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
