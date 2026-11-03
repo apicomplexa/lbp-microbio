@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Container entry point: runs the workflow (reads -> PICRUSt2) in /work and
-# packs everything needed to continue the analysis into /work/results.zip.
+# packs everything needed to continue the analysis into /work/results.zip
+# and /work/data_temp.zip.
 #
 #   /opt/lbp-microbio   code (read-only, from the image)
 #   /input/samples.tsv  sample sheet (mounted read-only)
@@ -63,9 +64,9 @@ done
 python "$CODE/docker/pack_results.py" "$WORK" "$CODE" "$status"
 
 if [[ $status -eq 0 ]]; then
-    echo "=== Готово. Результат: results.zip в рабочей папке ==="
+    echo "=== Готово. Результат: results.zip и data_temp.zip в рабочей папке ==="
 else
-    echo "=== Пайплайн завершился с ошибкой (код $status). results.zip содержит то, что успело посчитаться, и логи. ===" >&2
+    echo "=== Пайплайн завершился с ошибкой (код $status). results.zip и data_temp.zip содержат то, что успело посчитаться, и логи. ===" >&2
     echo "=== Повторный запуск той же командой продолжит с места остановки. ===" >&2
 fi
 exit $status
