@@ -46,7 +46,8 @@ echo "=== Рабочая папка: $WORKDIR ==="
 TTY_ARGS=()
 [[ -t 0 && -t 1 ]] && TTY_ARGS=(-it)
 
-exec $ENGINE run --rm --init "${TTY_ARGS[@]}" "${USER_ARGS[@]}" \
+# --stop-timeout: time for snakemake to stop and for results.zip to be packed
+exec $ENGINE run --rm --init --stop-timeout 300 "${TTY_ARGS[@]}" "${USER_ARGS[@]}" \
     -v "$WORKDIR:/work:z" \
     -v "$SAMPLES:/input/samples.tsv:ro,z" \
     "$IMAGE" "$@"

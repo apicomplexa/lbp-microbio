@@ -49,4 +49,7 @@ RUN found=$(find /opt/lbp-microbio /tmp /root /input -path /opt/lbp-microbio/.pi
         -o -name 'SraRunTable*' -o -name 'ids_map*' -o -name '.env' \) -print 2>/dev/null || true) \
     && if [ -n "$found" ]; then echo "Sensitive files in the image:"; echo "$found"; exit 1; fi
 
+# `docker run --init` (tini): forward `docker stop` to snakemake as well, not only
+# to the entry point, so it stops gracefully and results.zip is still packed
+ENV TINI_KILL_PROCESS_GROUP=1
 ENTRYPOINT ["/opt/lbp-microbio/docker/entrypoint.sh"]

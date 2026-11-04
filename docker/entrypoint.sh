@@ -52,8 +52,13 @@ snakemake_cmd=(
 "${snakemake_cmd[@]}" --unlock >/dev/null 2>&1 || true
 
 echo "=== lbp-microbio: запуск пайплайна (ядер: $(nproc)) ==="
+# Ctrl-C (and `docker stop`, see TINI_KILL_PROCESS_GROUP in the Dockerfile)
+# reaches snakemake too, which shuts down gracefully; keep this shell alive so
+# the partial results and the Snakemake log still get packed.
+trap 'echo "=== Прервано, упаковываю то, что успело посчитаться ===" >&2' INT TERM
 status=0
 "${snakemake_cmd[@]}" "$@" || status=$?
+trap - INT TERM
 
 # --dry-run / --help etc.: nothing to pack
 for arg in "$@"; do
